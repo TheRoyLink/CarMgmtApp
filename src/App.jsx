@@ -2,10 +2,14 @@
 import './App.css';
 import { useState, useEffect } from "react";
 
+
 import NavBar from './components/NavBar';
 import MainContent from './components/MainContent';
+import ExportButton from './components/ExportButton';
+import Message from './components/Message';
 
 function App() {
+
 const [data, setData] = useState(() => {
     const saved = localStorage.getItem("gasData");
     return saved ? JSON.parse(saved) : [];
@@ -56,6 +60,9 @@ const [data, setData] = useState(() => {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
+      <div><NavBar /></div>
+      <div><MainContent /></div>
+      <div><Message /></div> 
       <h1 className="text-2xl font-bold mb-4">🚗 Registro de Gasolina</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 my-4">
@@ -100,6 +107,9 @@ const [data, setData] = useState(() => {
           ))}
         </tbody>
       </table>
+
+      {/* Botón de exportación al final de la página */}
+      <ExportButton data={data} fileName="registros_gasolina" />
     </div>
   );
 }
